@@ -4,6 +4,7 @@ from TravelCompanion import models
 
 
 @app.route('/')
+@app.route('/home')
 def home():
     rec = models.Airport.query.all()
     print('*'*100)
