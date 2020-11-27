@@ -3,5 +3,7 @@ from travelcompapp import views
 
 urlpatterns = [
     url(r'^getuserlist$', views.user_list),
-    url(r'^getuser$', views.user)
+    url(r'^getuser$', views.user),
+    url(r'^travelinfo$', views.travel_info_create_get),
+    url(r'^travelinfogroupby$', views.get_info_group_flight_no)
 ]
