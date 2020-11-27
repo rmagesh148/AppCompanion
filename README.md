@@ -24,7 +24,8 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
-}```
+}
+```
 
 Make sure to create/modify your databases like how it is in TravelCompProject/settings.py
 
