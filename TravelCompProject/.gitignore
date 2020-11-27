@@ -1,0 +1,25 @@
+venv/
+*.pyc
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+### Django.Python Stack ###
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+
+#Mac
+.DS_Store
