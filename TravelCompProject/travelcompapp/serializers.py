@@ -35,4 +35,3 @@ class PassengerGroupBySerializer(serializers.Serializer):
     dep_arline_code = serializers.CharField(max_length=100)
     travel_date = serializers.DateField()
     status_of_ticket = serializers.BooleanField()
-    comments = serializers.CharField(max_length=200)

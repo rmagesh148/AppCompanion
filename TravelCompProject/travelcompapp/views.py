@@ -83,14 +83,21 @@ def get_info_group_flight_no(request):
         if request.method == 'GET' :
             from_range_date = request.GET.get('from_range_date', None)
             to_range_date = request.GET.get('to_range_date', None)
+            arr_arline_code = request.GET.get('arr_arline_code', None)
+            dep_arline_code = request.GET.get('dep_arline_code', None)
+
+            if arr_arline_code is not None and dep_arline_code is not None:
+                filtered_objects = PassengerTravelInfo.objects.filter(arr_arline_code=arr_arline_code, dep_arline_code=dep_arline_code)
+            else:
+                return JsonResponse({'message' : 'Arr/Dep Input is missing'}, status=status.HTTP_400_BAD_REQUEST)
             
             if from_range_date is not None and to_range_date is None:
-                travel_list = (PassengerTravelInfo.objects.filter(travel_date=parse_date(from_range_date))
+                travel_list = (filtered_objects.filter(travel_date=parse_date(from_range_date))
                     .values('flight_no', 'airlines', 'arr_arline_code', 'dep_arline_code', 'status_of_ticket', 'travel_date', 'comments')
                     .annotate(count=Count('flight_no')))
             
             elif from_range_date is not None and to_range_date is not None:
-                travel_list = (PassengerTravelInfo.objects.filter(travel_date__range=[parse_date(from_range_date), parse_date(to_range_date)])
+                travel_list = (filtered_objects.filter(travel_date__range=[parse_date(from_range_date), parse_date(to_range_date)])
                     .values('flight_no', 'airlines', 'arr_arline_code', 'dep_arline_code', 'status_of_ticket', 'travel_date', 'comments')
                     .annotate(count=Count('flight_no')))
             if not travel_list:
