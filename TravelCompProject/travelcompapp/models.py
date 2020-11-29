@@ -3,6 +3,8 @@ from django.db import models
 
 # Create your models here.
 # Need to add active_user boolean.
+
+
 class UserDetails(models.Model):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     guid = models.UUIDField(default=uuid.uuid4)
@@ -13,6 +15,7 @@ class UserDetails(models.Model):
     email_id = models.EmailField(blank=False)
     created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
+
 
 class PassengerTravelInfo(models.Model):
     guid = models.UUIDField(default=uuid.uuid4)
@@ -29,5 +32,19 @@ class PassengerTravelInfo(models.Model):
     comments = models.TextField()
     created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+
+class RequestStore(models.Model):
+    primary_guid = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    from_user_id = models.CharField(max_length=100, blank=False)
+    to_user_id = models.CharField(max_length=100, blank=False)
+    request_status = models.CharField(max_length=20, blank=False)
+    flight_no = models.CharField(max_length=100)
+    request_note = models.TextField()
+    travel_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
+    created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+
 
 

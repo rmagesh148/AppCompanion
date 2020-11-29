@@ -26,3 +26,6 @@ pythonenv*
 
 #DB Migrations
 travelcompapp/migrations/
+
+#Github
+/.idea/*
