@@ -30,3 +30,6 @@ travelcompapp/migrations/
 #Github
 /.idea/*
 .idea/*
+.idea/**/*
+.idea/*.xml
+.idea/*.iml
