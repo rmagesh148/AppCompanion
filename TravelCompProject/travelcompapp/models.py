@@ -10,7 +10,7 @@ class UserDetails(models.Model):
     guid = models.UUIDField(default=uuid.uuid4)
     first_name = models.CharField(max_length=200, blank=False)
     last_name = models.CharField(max_length=200, blank=False)
-    picture_url = models.URLField(max_length=200, blank=True)
+    picture_url = models.URLField(blank=True)
     phone_number = models.IntegerField(blank=True, null=True)
     email_id = models.EmailField(blank=False)
     created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -35,6 +35,7 @@ class PassengerTravelInfo(models.Model):
 
 
 class RequestStore(models.Model):
+    guid = models.UUIDField(default=uuid.uuid4)
     primary_guid = models.UUIDField(primary_key=True, default=uuid.uuid4)
     from_user_id = models.CharField(max_length=100, blank=False)
     to_user_id = models.CharField(max_length=100, blank=False)

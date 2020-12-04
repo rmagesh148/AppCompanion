@@ -115,3 +115,8 @@ def get_info_group_flight_no(request):
     except Exception as e:
         return JsonResponse({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+@api_view(['GET','POST'])
+def get_create_request(request):
+
+

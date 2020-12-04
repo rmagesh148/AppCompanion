@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from travelcompapp.models import UserDetails, PassengerTravelInfo
+from travelcompapp.models import UserDetails, PassengerTravelInfo, RequestStore
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
@@ -38,4 +38,17 @@ class PassengerGroupBySerializer(serializers.Serializer):
     dep_arline_code = serializers.CharField(max_length=100)
     travel_date = serializers.DateField()
     status_of_ticket = serializers.BooleanField()
+
+
+class RequestSendSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = RequestStore
+        fields = ('guid',
+                  'from_user_id',
+                  'to_user_id',
+                  'request_status',
+                  'flight_no',
+                  'request_note',
+                  'travel_date')
 
