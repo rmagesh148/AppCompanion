@@ -8,7 +8,7 @@ class UserDetails(models.Model):
     guid = models.UUIDField(default=uuid.uuid4)
     first_name = models.CharField(max_length=200, blank=False)
     last_name = models.CharField(max_length=200, blank=False)
-    picture_url = models.URLField(max_length=200, blank=True)
+    picture_url = models.URLField(unique=True, blank=True)
     phone_number = models.IntegerField(blank=True)
     email_id = models.EmailField(blank=False)
     created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)

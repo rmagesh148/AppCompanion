@@ -46,3 +46,8 @@ def user(request):
             return JsonResponse({'message' : 'Bad Request'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return JsonResponse({'message' : str(e)}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+def home(request):
+    if request.method == 'GET':
+        return JsonResponse({'message' : 'Home Page'}, status=status.HTTP_404_NOT_FOUND)
