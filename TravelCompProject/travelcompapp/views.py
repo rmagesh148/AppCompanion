@@ -10,6 +10,11 @@ from travelcompapp.models import UserDetails, PassengerTravelInfo
 from travelcompapp.serializers import UserDetailsSerializer, PassengerTravelInfoSerializer, PassengerGroupBySerializer
 
 
+@api_view(['GET'])
+def home(request):
+    if request.method == 'GET':
+        return JsonResponse({'message' : 'Home Page'}, status=status.HTTP_404_NOT_FOUND)
+
 @api_view(['GET', 'POST'])
 def user_list(request):
     if request.method == 'GET':
@@ -77,14 +82,6 @@ def travel_info_create_get(request):
                 return JsonResponse(travel_info_serializer.data, safe=False)
             return JsonResponse({'message': 'Bad Request'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-<<<<<<< HEAD
-            return JsonResponse({'message' : str(e)}, status=status.HTTP_404_NOT_FOUND)
-
-@api_view(['GET'])
-def home(request):
-    if request.method == 'GET':
-        return JsonResponse({'message' : 'Home Page'}, status=status.HTTP_404_NOT_FOUND)
-=======
             return JsonResponse({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -128,4 +125,3 @@ def get_info_group_flight_no(request):
 def get_create_request(request):
 
 
->>>>>>> 833eadc4ebb79d9f14e47a759303eaf4dd6864de
