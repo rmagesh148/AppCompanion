@@ -3,16 +3,26 @@ from django.db import models
 
 # Create your models here.
 # Need to add active_user boolean.
+
+
 class UserDetails(models.Model):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     guid = models.UUIDField(default=uuid.uuid4)
     first_name = models.CharField(max_length=200, blank=False)
     last_name = models.CharField(max_length=200, blank=False)
-    picture_url = models.URLField(max_length=200, blank=True)
+<<<<<<< HEAD
+    picture_url = models.URLField(unique=True, blank=True)
+    phone_number = models.IntegerField(blank=True)
+    email_id = models.EmailField(blank=False)
+    created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
+=======
+    picture_url = models.URLField(blank=True)
     phone_number = models.IntegerField(blank=True, null=True)
     email_id = models.EmailField(blank=False)
     created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
+
 
 class PassengerTravelInfo(models.Model):
     guid = models.UUIDField(default=uuid.uuid4)
@@ -31,3 +41,19 @@ class PassengerTravelInfo(models.Model):
     updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
 
 
+class RequestStore(models.Model):
+    guid = models.UUIDField(default=uuid.uuid4)
+    primary_guid = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    from_user_id = models.CharField(max_length=100, blank=False)
+    to_user_id = models.CharField(max_length=100, blank=False)
+    request_status = models.CharField(max_length=20, blank=False)
+    flight_no = models.CharField(max_length=100)
+    request_note = models.TextField()
+    travel_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
+    created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+
+
+
+>>>>>>> 833eadc4ebb79d9f14e47a759303eaf4dd6864de

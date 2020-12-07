@@ -26,3 +26,10 @@ pythonenv*
 
 #DB Migrations
 travelcompapp/migrations/
+
+#Intellij
+/.idea/*
+.idea/*
+.idea/**/*
+.idea/*.xml
+.idea/*.iml
