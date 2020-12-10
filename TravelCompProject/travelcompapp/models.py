@@ -10,13 +10,13 @@ class UserDetails(models.Model):
     guid = models.UUIDField(default=uuid.uuid4)
     first_name = models.CharField(max_length=200, blank=False)
     last_name = models.CharField(max_length=200, blank=False)
-<<<<<<< HEAD
+
     picture_url = models.URLField(unique=True, blank=True)
     phone_number = models.IntegerField(blank=True)
     email_id = models.EmailField(blank=False)
     created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
-=======
+
     picture_url = models.URLField(blank=True)
     phone_number = models.IntegerField(blank=True, null=True)
     email_id = models.EmailField(blank=False)
@@ -56,4 +56,4 @@ class RequestStore(models.Model):
 
 
 
->>>>>>> 833eadc4ebb79d9f14e47a759303eaf4dd6864de
+

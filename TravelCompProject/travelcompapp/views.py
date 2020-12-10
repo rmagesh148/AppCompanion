@@ -1,3 +1,5 @@
+import json
+
 from django.utils.dateparse import parse_date
 from django.http.response import JsonResponse
 from django.db.models import Count
@@ -7,8 +9,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 
 from travelcompapp.models import UserDetails, PassengerTravelInfo
-from travelcompapp.serializers import UserDetailsSerializer, PassengerTravelInfoSerializer, PassengerGroupBySerializer
-
+from travelcompapp.serializers \
+    import UserDetailsSerializer, PassengerTravelInfoSerializer, PassengerGroupBySerializer,AirportCitySerializer
 
 @api_view(['GET'])
 def home(request):
@@ -99,7 +101,7 @@ def get_info_group_flight_no(request):
                 filtered_objects = (PassengerTravelInfo.objects
                                     .filter(arr_arline_code=arr_arline_code, dep_arline_code=dep_arline_code))
             else:
-                return JsonResponse({'message': 'Arr/Dep Input is missing'}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({'message': 'Arr/DePassengerGroupBySerializerp Input is missing'}, status=status.HTTP_400_BAD_REQUEST)
             
             if from_range_date is not None and to_range_date is None:
                 travel_list = (filtered_objects.filter(travel_date=parse_date(from_range_date))
@@ -121,7 +123,24 @@ def get_info_group_flight_no(request):
         return JsonResponse({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['GET','POST'])
-def get_create_request(request):
+'''@api_view(['GET','POST'])
+def get_create_request(request):'''
 
-
+@api_view(['GET'])
+def get_airport_city(request):
+    try:
+        if request.method == 'GET':
+            # search_query = request.GET.get('search_query',None)
+            output = [{"airport_city": "Chennai", "airport_iata": "MAA"},
+                      {"airport_city": "New York", "airport_iata": "NYC"},
+                      {"airport_city": "DC", "airport_iata": "IAD"},
+                      {"airport_city": "Atlanta", "airport_iata": "ATL"}]
+            if output is not None:
+                output_serializer = AirportCitySerializer(output, many = True)
+                return JsonResponse(output_serializer.data, safe=False)
+            else:
+                return JsonResponse({'message': 'Result set is Empty'}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            print("failure")
+    except Exception as e:
+        print(e)

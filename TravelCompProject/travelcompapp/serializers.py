@@ -52,3 +52,10 @@ class RequestSendSerializer(serializers.ModelSerializer):
                   'request_note',
                   'travel_date')
 
+
+class AirportCitySerializer(serializers.Serializer):
+
+    airport_city = serializers.CharField(max_length=30)
+    airport_iata = serializers.CharField(max_length=10)
+
+
