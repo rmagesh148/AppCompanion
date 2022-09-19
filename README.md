@@ -1,6 +1,6 @@
 # AppCompanion
 
-This is a Python + React Web App
+This is a Python + Native Mobile App
 
 - Powered by Django in the backend.
 
