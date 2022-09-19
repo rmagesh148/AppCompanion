@@ -41,22 +41,22 @@ Make sure to create/modify your databases like how it is in TravelCompProject/se
 
 Run Application:
 
-- - Delete the Migration folder from the application i.e. travelcompapp/migrations
-- - Run this command from the Parent Folder: `python manage.py makemigrations travelcompapp`
-    - - Output after Running the above command:
-    - - Migrations for 'travelcompapp':
-        `travelcompapp/migrations/0001_initial.py - Create model UserDetails`
+- Delete the Migration folder from the application i.e. `travelcompapp/migrations`
+- Run this command from the Parent Folder: `python manage.py makemigrations travelcompapp`
+  - Output after Running the above command:
+  - - Migrations for 'travelcompapp':
+      `travelcompapp/migrations/0001_initial.py - Create model UserDetails`
 - - Run this command to migrate the DB: `python manage.py migrate travelcompapp`
-    - - Output:
-      - - Operations to perform:
-          Apply all migrations: travelcompapp
-      - - Running migrations:
-          Applying travelcompapp.0001_initial... OK
-- - - Run this command to migrate the DB: `python manage.py migrate`
-      - - Output:
-      - - This Above command migrates the Admin, Auth part of the app.
-- - To Run the server: python manage.py runserver 8080 # localhost server will run on 8080
+    - Output:
+      - Operations to perform:
+        - Apply all migrations: travelcompapp
+      - Running migrations:
+        - Applying travelcompapp.0001_initial... OK
+- Run this command to migrate the DB: `python manage.py migrate`
+  - Output:
+    - This Above command migrates the Admin, Auth part of the app.
+- To Run the server: `python manage.py runserver 8080` # localhost server will run on 8080
 
 Test the application from PostMan:
 
-- - http://localhost:8080/api/getuserlist
+`http://localhost:8080/api/getuserlist`
