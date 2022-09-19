@@ -1,26 +1,32 @@
 # AppCompanion
 
 This is a Python + React Web App
-Powered by Django in the backend.
+
+- Powered by Django in the backend.
 
 Installation:
-Create Virutal Env for the project and start installing the below mentioned packages.
+
+- Create Virutal Env for the project and start installing the below mentioned packages.
 
 Django:
-pip install djangorestframework
-pip install django-cors-headers
+
+- `pip install djangorestframework`
+- `pip install django-cors-headers`
 
 Postges:
-pip install psycopg2
+
+- `pip install psycopg2`
 
 Conda:
-conda create --name env_name (Eg: travel-comp-app)
-conda activate env_name
+
+- `conda create --name env_name` (Eg: travel-comp-app)
+- `conda activate env_name`
 
 Installtion Packages:
-conda install django djangorestframework
-conda install -c conda-forge django-cors-headers
-conda install -c anaconda psycopg2
+
+- `conda install django djangorestframework`
+- `conda install -c conda-forge django-cors-headers`
+- `conda install -c anaconda psycopg2`
 
 In settings.py at the parent level of the application:
 
@@ -45,7 +51,7 @@ Run Application:
 - Run this command from the Parent Folder: `python manage.py makemigrations travelcompapp`
   - Output after Running the above command:
   - - Migrations for 'travelcompapp':
-      `travelcompapp/migrations/0001_initial.py - Create model UserDetails`
+      travelcompapp/migrations/0001_initial.py - Create model UserDetails
 - - Run this command to migrate the DB: `python manage.py migrate travelcompapp`
     - Output:
       - Operations to perform:
