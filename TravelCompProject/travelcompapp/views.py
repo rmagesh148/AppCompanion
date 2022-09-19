@@ -1,16 +1,14 @@
-import json
-
 from django.utils.dateparse import parse_date
 from django.http.response import JsonResponse
 from django.db.models import Count
 
 from rest_framework.parsers import JSONParser
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 
 from travelcompapp.models import UserDetails, PassengerTravelInfo
-from travelcompapp.serializers \
-    import UserDetailsSerializer, PassengerTravelInfoSerializer, PassengerGroupBySerializer,AirportCitySerializer
+from travelcompapp.serializers import UserDetailsSerializer, PassengerTravelInfoSerializer, PassengerGroupBySerializer, AirportCitySerializer, PassengerInfoSerializer
+
 
 @api_view(['GET'])
 def home(request):
@@ -94,26 +92,26 @@ def get_info_group_flight_no(request):
             travel_list = []
             from_range_date = request.GET.get('from_range_date', None)
             to_range_date = request.GET.get('to_range_date', None)
-            arr_arline_code = request.GET.get('arr_arline_code', None)
-            dep_arline_code = request.GET.get('dep_arline_code', None)
+            arr_airport_code = request.GET.get('arr_airport_code', None)
+            dep_airport_code = request.GET.get('dep_airport_code', None)
 
-            if arr_arline_code is not None and dep_arline_code is not None:
+            if arr_airport_code is not None and dep_airport_code is not None:
                 filtered_objects = (PassengerTravelInfo.objects
-                                    .filter(arr_arline_code=arr_arline_code, dep_arline_code=dep_arline_code))
+                                    .filter(arr_airport_code=arr_airport_code, dep_airport_code=dep_airport_code))
             else:
-                return JsonResponse({'message': 'Arr/DePassengerGroupBySerializerp Input is missing'}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({'message': 'Arr/Dep Input is missing'}, status=status.HTTP_400_BAD_REQUEST)
             
             if from_range_date is not None and to_range_date is None:
                 travel_list = (filtered_objects.filter(travel_date=parse_date(from_range_date))
-                               .values('flight_no', 'airlines', 'arr_arline_code',
-                                       'dep_arline_code', 'status_of_ticket', 'travel_date')
+                               .values('flight_no', 'airlines', 'arr_airport_code',
+                                       'dep_airport_code', 'status_of_ticket', 'travel_date')
                                .annotate(count=Count('flight_no')))
             
             elif from_range_date is not None and to_range_date is not None:
                 travel_list = (filtered_objects
                                .filter(travel_date__range=[parse_date(from_range_date), parse_date(to_range_date)])
-                               .values('flight_no', 'airlines', 'arr_arline_code',
-                                       'dep_arline_code', 'status_of_ticket', 'travel_date')
+                               .values('flight_no', 'airlines', 'arr_airport_code',
+                                       'dep_airport_code', 'status_of_ticket', 'travel_date')
                                .annotate(count=Count('flight_no')))
             if not travel_list:
                 return JsonResponse({'message': 'Result set is Empty'}, status=status.HTTP_204_NO_CONTENT)
@@ -122,9 +120,6 @@ def get_info_group_flight_no(request):
     except Exception as e:
         return JsonResponse({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-'''@api_view(['GET','POST'])
-def get_create_request(request):'''
 
 @api_view(['GET'])
 def get_airport_city(request):
@@ -142,5 +137,25 @@ def get_airport_city(request):
                 return JsonResponse({'message': 'Result set is Empty'}, status=status.HTTP_204_NO_CONTENT)
         else:
             print("failure")
+    except Exception as e:
+        print(e)
+
+
+@api_view(['GET'])
+def get_travelers_info(request):
+    try:
+        if request.method == 'GET':
+            flight_no = request.GET.get('flight_no', None)
+            travel_date = request.GET.get('travel_date', None)
+
+            if flight_no is not None and travel_date is not None:
+                travel_info_list = PassengerTravelInfo.objects.filter(travel_date=parse_date(travel_date),
+                                                                      flight_no=flight_no)
+                print(travel_info_list)
+                print(travel_info_list)
+                user_info = UserDetails.objects.filter(user_id = travel_info_list[''])
+
+            else:
+                return JsonResponse({'message' : 'Input is missing'}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         print(e)
