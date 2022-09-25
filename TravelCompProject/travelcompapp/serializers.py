@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, viewsets
 from travelcompapp.models import UserDetails, PassengerTravelInfo, RequestStore
 
 
@@ -51,4 +51,22 @@ class RequestSendSerializer(serializers.ModelSerializer):
                   'flight_no',
                   'request_note',
                   'travel_date')
+
+
+class AirportCitySerializer(serializers.Serializer):
+
+    airport_city = serializers.CharField(max_length=30)
+    airport_iata = serializers.CharField(max_length=10)
+
+
+class PassengerInfoSerializer(serializers.ModelSerializer):
+
+    user_info = UserDetailsSerializer(read_only=True)
+
+    class Meta:
+        model = PassengerTravelInfo
+        fields = ('user_info', )
+
+
+
 

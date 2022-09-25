@@ -10,13 +10,6 @@ class UserDetails(models.Model):
     guid = models.UUIDField(default=uuid.uuid4)
     first_name = models.CharField(max_length=200, blank=False)
     last_name = models.CharField(max_length=200, blank=False)
-<<<<<<< HEAD
-    picture_url = models.URLField(unique=True, blank=True)
-    phone_number = models.IntegerField(blank=True)
-    email_id = models.EmailField(blank=False)
-    created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
-    updated_date_time = models.DateTimeField(auto_now=True, auto_now_add=False)
-=======
     picture_url = models.URLField(blank=True)
     phone_number = models.IntegerField(blank=True, null=True)
     email_id = models.EmailField(blank=False)
@@ -30,11 +23,14 @@ class PassengerTravelInfo(models.Model):
     passenger_user_id = models.CharField(max_length=100, blank=False)
     flight_no = models.CharField(max_length=100)
     airlines = models.CharField(max_length=200)
-    arr_arline_code = models.CharField(max_length=100)
-    dep_arline_code = models.CharField(max_length=100)
+    arr_airport_code = models.CharField(max_length=100, blank=False, default=None)
+    arr_airport_name = models.CharField(max_length=100, blank=False, default=None)
+    arr_airport_city = models.CharField(max_length=100, blank=False, default=None)
+    dep_airport_code = models.CharField(max_length=100, blank=False, default=None)
+    dep_airport_name = models.CharField(max_length=100, blank=False, default=None)
+    dep_airport_city = models.CharField(max_length=100, blank=False, default=None)
     travel_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
-    no_of_adults = models.IntegerField(blank=True, null=True)
-    no_of_kids = models.IntegerField(blank=True, null=True)
+    no_of_passengers = models.IntegerField(blank=True, null=True)
     status_of_ticket = models.BooleanField(blank=False)
     comments = models.TextField()
     created_date_time = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -56,4 +52,4 @@ class RequestStore(models.Model):
 
 
 
->>>>>>> 833eadc4ebb79d9f14e47a759303eaf4dd6864de
+
